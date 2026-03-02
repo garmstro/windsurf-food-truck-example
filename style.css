@@ -812,6 +812,163 @@ ul {
 }
 
 /* ============================================================
+   OUR STORY SECTION
+   ============================================================ */
+#story {
+  background-color: var(--color-warm-cream);
+  padding: var(--section-padding-v) 32px;
+}
+
+.story-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.story-header {
+  text-align: center;
+}
+
+.story-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.story-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.story-paragraph {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-body-text);
+  line-height: 1.75;
+}
+
+.story-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-image-placeholder {
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-peach-tint);
+  border-radius: var(--radius-image);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 56px rgba(26, 14, 5, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.story-image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(244, 166, 36, 0.12) 0%, transparent 60%);
+}
+
+.story-image-emoji {
+  font-size: 120px;
+  line-height: 1;
+  position: relative;
+  filter: drop-shadow(0 6px 16px rgba(92, 61, 30, 0.15));
+  user-select: none;
+}
+
+.story-contact {
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(92, 61, 30, 0.10);
+}
+
+.story-contact-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-body-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.story-contact-link {
+  color: var(--color-amber-gold);
+  transition: color 0.2s ease;
+}
+
+.story-contact-link:hover {
+  color: var(--color-spicy-orange);
+}
+
+.story-contact-divider {
+  color: var(--color-muted-text);
+}
+
+/* ============================================================
+   OUR STORY — RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .story-content {
+    gap: 40px;
+  }
+
+  .story-image-placeholder {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  #story {
+    padding: var(--section-padding-v) 20px;
+  }
+
+  .story-inner {
+    gap: 40px;
+  }
+
+  .story-header {
+    text-align: center;
+  }
+
+  .story-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .story-image-placeholder {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .story-image-emoji {
+    font-size: 88px;
+  }
+
+  .story-contact-text {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .story-contact-divider {
+    display: none;
+  }
+}
+
+/* ============================================================
    MENU — RESPONSIVE
    ============================================================ */
 @media (max-width: 900px) {
