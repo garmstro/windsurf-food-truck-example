@@ -519,13 +519,71 @@
   </section>
 
   <!-- ============================================================
-       FIND US SECTION — placeholder
+       FIND US SECTION
        ============================================================ -->
-  <section id="find-us" class="section-stub">
+  <section id="find-us">
     <div class="container">
-      <p class="stub-label">Coming Next</p>
-      <h2 class="stub-heading">Find Us</h2>
-      <p class="stub-body">Power &amp; Light District, Kansas City — plus our catering inquiry form.<br>Coming in the next build session.</p>
+      <div class="find-us-header">
+        <p class="section-eyebrow">Visit Us</p>
+        <h2 class="section-heading">Find Us</h2>
+      </div>
+
+      <div class="find-us-grid">
+        <!-- Location & Hours Column -->
+        <div class="find-us-card">
+          <h3 class="find-us-card__title">Location &amp; Hours</h3>
+          <div class="find-us-card__content">
+            <div class="location-block">
+              <p class="location-label">Power &amp; Light District</p>
+              <p class="location-text">Downtown Kansas City, MO</p>
+              <p class="location-text">Weekdays only</p>
+            </div>
+            <div class="hours-block">
+              <p class="hours-label">Hours</p>
+              <p class="hours-text">Monday – Friday<br>11:00 AM – 3:00 PM</p>
+              <p class="hours-note">📌 Note: Confirm hours before visiting for daily updates.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catering Inquiry Form Column -->
+        <div class="find-us-card">
+          <h3 class="find-us-card__title">Book Us for an Event</h3>
+          <form class="catering-form" action="mailto:matt@mattspotats.com" method="POST" enctype="text/plain">
+            <div class="form-group">
+              <label for="catering-name" class="form-label">Name</label>
+              <input type="text" id="catering-name" name="Name" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="catering-email" class="form-label">Email</label>
+              <input type="email" id="catering-email" name="Email" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="catering-phone" class="form-label">Phone</label>
+              <input type="tel" id="catering-phone" name="Phone" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="catering-date" class="form-label">Event Date</label>
+              <input type="date" id="catering-date" name="Event Date" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="catering-guests" class="form-label">Guest Count</label>
+              <input type="number" id="catering-guests" name="Guest Count" class="form-input" min="1" required>
+            </div>
+
+            <div class="form-group">
+              <label for="catering-message" class="form-label">Tell Us About Your Event</label>
+              <textarea id="catering-message" name="Message" class="form-textarea" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 

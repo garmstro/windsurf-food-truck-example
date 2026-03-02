@@ -1016,3 +1016,191 @@ ul {
     gap: 4px;
   }
 }
+
+/* ============================================================
+   FIND US SECTION
+   ============================================================ */
+#find-us {
+  background-color: var(--color-peach-tint);
+  padding: var(--section-padding-v) 32px;
+}
+
+.find-us-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.find-us-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.find-us-card {
+  background-color: var(--color-warm-cream);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.find-us-card__title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--color-potato-brown);
+  line-height: 1.2;
+}
+
+.find-us-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* --- Location Block --- */
+.location-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.location-label {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-amber-gold);
+}
+
+.location-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-body-text);
+  line-height: 1.6;
+}
+
+/* --- Hours Block --- */
+.hours-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(92, 61, 30, 0.10);
+}
+
+.hours-label {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-amber-gold);
+}
+
+.hours-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-body-text);
+  line-height: 1.6;
+}
+
+.hours-note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-muted-text);
+  line-height: 1.6;
+  margin-top: 8px;
+  padding: 12px;
+  background-color: rgba(244, 166, 36, 0.08);
+  border-radius: 8px;
+}
+
+/* --- Catering Form --- */
+.catering-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-potato-brown);
+  letter-spacing: 0.01em;
+}
+
+.form-input,
+.form-textarea {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-body-text);
+  background-color: var(--color-warm-cream);
+  border: 1.5px solid rgba(92, 61, 30, 0.15);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-amber-gold);
+  box-shadow: 0 0 0 3px rgba(244, 166, 36, 0.10);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.catering-form .btn {
+  margin-top: 8px;
+}
+
+/* ============================================================
+   FIND US — RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .find-us-grid {
+    gap: 32px;
+  }
+
+  .find-us-card {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  #find-us {
+    padding: var(--section-padding-v) 20px;
+  }
+
+  .find-us-header {
+    margin-bottom: 40px;
+  }
+
+  .find-us-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .find-us-card {
+    padding: 28px;
+  }
+
+  .find-us-card__title {
+    font-size: 24px;
+  }
+}
