@@ -31,7 +31,7 @@ Session 1/
 - `logo.svg` top-left in sticky nav
 - Headline: **"Potatoes. Elevated."** (Fredoka One, 64–80px)
 - Subheading: *"Spud-tacular eats on wheels — Kansas City's favorite build-your-own potato truck."*
-- Two CTA buttons: **"Build Your Potat"** (scrolls to menu) + **"Find Us"** (scrolls to location)
+- Two CTA buttons: **"Build Your Potato"** (scrolls to menu) + **"Find Us"** (scrolls to location)
 
 ### 2. Menu
 - Sticky tab bar: `Signatures | Bases | Proteins | Cheeses | Sauces | Extras | Drinks`
