@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 180" width="500" height="180" role="img" aria-label="Matt's Potats logo">
+
+  <!-- === BADGE (left side) === -->
+
+  <!-- Outer ring -->
+  <circle cx="90" cy="90" r="80" fill="#5C3D1E"/>
+  <!-- Inner fill -->
+  <circle cx="90" cy="90" r="71" fill="#F4A624"/>
+
+  <!-- Potato body (slightly tilted) -->
+  <ellipse cx="90" cy="100" rx="37" ry="29" fill="#FFF8F0" transform="rotate(-10 90 100)"/>
+
+  <!-- Potato skin texture / bumps -->
+  <circle cx="72" cy="90" r="5.5" fill="#FFE8C8"/>
+  <circle cx="107" cy="94" r="4.5" fill="#FFE8C8"/>
+  <circle cx="88" cy="78" r="4" fill="#FFE8C8"/>
+  <circle cx="76" cy="112" r="3.5" fill="#FFE8C8"/>
+  <circle cx="104" cy="114" r="3" fill="#FFE8C8"/>
+
+  <!-- Potato eyes -->
+  <circle cx="81" cy="98" r="4.5" fill="#5C3D1E"/>
+  <circle cx="97" cy="95" r="4" fill="#5C3D1E"/>
+  <!-- Eye shine -->
+  <circle cx="82.5" cy="96.5" r="1.8" fill="white"/>
+  <circle cx="98.5" cy="93.5" r="1.5" fill="white"/>
+
+  <!-- Potato smile -->
+  <path d="M81 109 Q90 117 101 110" stroke="#5C3D1E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Steam wisps -->
+  <path d="M76 68 Q79.5 59 76 50" stroke="#5C3D1E" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.45"/>
+  <path d="M90 65 Q93.5 56 90 47" stroke="#5C3D1E" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.45"/>
+  <path d="M104 68 Q107.5 59 104 50" stroke="#5C3D1E" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- === WORDMARK (right side) === -->
+
+  <!-- "MATT'S" label -->
+  <text
+    x="182" y="68"
+    font-family="Arial Black, Impact, sans-serif"
+    font-size="23"
+    font-weight="900"
+    fill="#F4A624"
+    letter-spacing="6">MATT'S</text>
+
+  <!-- Divider line -->
+  <line x1="182" y1="80" x2="488" y2="80" stroke="#5C3D1E" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- "POTATS" main display text -->
+  <text
+    x="182" y="140"
+    font-family="Arial Black, Impact, sans-serif"
+    font-size="67"
+    font-weight="900"
+    fill="#5C3D1E"
+    letter-spacing="3">POTATS</text>
+
+  <!-- Tagline -->
+  <text
+    x="182" y="162"
+    font-family="Georgia, Times New Roman, serif"
+    font-size="12"
+    fill="#5C3D1E"
+    letter-spacing="2.5"
+    font-style="italic"
+    opacity="0.65">spud-tacular eats on wheels</text>
+
+</svg>
