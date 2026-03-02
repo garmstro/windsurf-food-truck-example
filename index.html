@@ -51,14 +51,429 @@
   </section>
 
   <!-- ============================================================
-       MENU SECTION — placeholder
+       MENU SECTION
        ============================================================ -->
-  <section id="menu" class="section-stub">
-    <div class="container">
-      <p class="stub-label">Coming Next</p>
-      <h2 class="stub-heading">The Menu</h2>
-      <p class="stub-body">Signatures, bases, proteins, cheeses, sauces, extras — all of it.<br>This section is coming in the next build session.</p>
+  <section id="menu">
+
+    <!-- Section Header -->
+    <div class="menu-header">
+      <div class="container">
+        <p class="section-eyebrow">What We're Serving</p>
+        <h2 class="section-heading">The Menu</h2>
+        <p class="section-sub">Start with a base, load it up your way — or let Matt decide with a Signature build.</p>
+      </div>
     </div>
+
+    <!-- Sticky Tab Bar -->
+    <div class="menu-tabbar" id="menu-tabbar">
+      <div class="menu-tabbar__inner">
+        <button class="tab-btn active" data-tab="signatures" type="button">⭐ Signatures</button>
+        <button class="tab-btn" data-tab="bases" type="button">🥔 Bases</button>
+        <button class="tab-btn" data-tab="proteins" type="button">🍗 Proteins</button>
+        <button class="tab-btn" data-tab="cheeses" type="button">🧀 Cheeses</button>
+        <button class="tab-btn" data-tab="sauces" type="button">🥫 Sauces</button>
+        <button class="tab-btn" data-tab="extras" type="button">✨ Extras</button>
+        <button class="tab-btn" data-tab="drinks" type="button">🥤 Drinks</button>
+      </div>
+    </div>
+
+    <!-- Tab Panels -->
+    <div class="menu-panels">
+      <div class="container">
+
+        <!-- ── Signatures ── -->
+        <div class="tab-panel active" id="tab-signatures" role="tabpanel">
+          <p class="panel-intro">Matt's handpicked combos. No decisions required.</p>
+          <div class="menu-grid menu-grid--signatures">
+
+            <article class="menu-card menu-card--signature">
+              <div class="menu-card__top">
+                <span class="menu-card__sig-badge">Signature</span>
+                <span class="menu-card__price">$12.00</span>
+              </div>
+              <h3 class="menu-card__name">The Classic Matt</h3>
+              <p class="menu-card__base"><span class="base-label">Base:</span> Steak Fries</p>
+              <p class="menu-card__toppings">Grilled chicken, shredded cheddar, ranch, chives</p>
+            </article>
+
+            <article class="menu-card menu-card--signature">
+              <div class="menu-card__top">
+                <span class="menu-card__sig-badge">Signature</span>
+                <span class="menu-card__price">$13.00</span>
+              </div>
+              <h3 class="menu-card__name">The Pulled Pork Paradise</h3>
+              <p class="menu-card__base"><span class="base-label">Base:</span> Crispy Crowns</p>
+              <p class="menu-card__toppings">Pulled pork, queso blanco, BBQ, pickled jalapeños</p>
+            </article>
+
+            <article class="menu-card menu-card--signature">
+              <div class="menu-card__top">
+                <span class="menu-card__sig-badge">Signature</span>
+                <span class="menu-card__price">$12.00</span>
+              </div>
+              <h3 class="menu-card__name">The Buffalo Bomb</h3>
+              <p class="menu-card__base"><span class="base-label">Base:</span> Curly Fries</p>
+              <p class="menu-card__toppings">Grilled chicken, pepper jack, buffalo, ranch</p>
+            </article>
+
+            <article class="menu-card menu-card--signature">
+              <div class="menu-card__top">
+                <span class="menu-card__sig-badge">Signature</span>
+                <span class="menu-card__price">$12.50</span>
+              </div>
+              <h3 class="menu-card__name">The Sweet &amp; Smoky</h3>
+              <p class="menu-card__base"><span class="base-label">Base:</span> Sweet Potato Fries</p>
+              <p class="menu-card__toppings">Pulled pork, shredded cheddar, sriracha honey</p>
+            </article>
+
+            <article class="menu-card menu-card--signature">
+              <div class="menu-card__top">
+                <span class="menu-card__sig-badge">Signature</span>
+                <span class="menu-card__price">$13.50</span>
+              </div>
+              <h3 class="menu-card__name">The Baked Boss</h3>
+              <p class="menu-card__base"><span class="base-label">Base:</span> Baked Potato</p>
+              <p class="menu-card__toppings">Shaved steak, queso blanco, sour cream, caramelized onions, chives</p>
+            </article>
+
+            <article class="menu-card menu-card--signature">
+              <div class="menu-card__top">
+                <span class="menu-card__sig-badge">Signature</span>
+                <span class="menu-card__price">$11.50</span>
+              </div>
+              <h3 class="menu-card__name">The Veggie Victory</h3>
+              <p class="menu-card__base"><span class="base-label">Base:</span> Tater Tots</p>
+              <p class="menu-card__toppings">Black beans, roasted veggies, crumbled feta, garlic aioli, pico de gallo</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── Bases ── -->
+        <div class="tab-panel" id="tab-bases" role="tabpanel">
+          <p class="panel-intro">Your foundation. Pick one — build from there.</p>
+          <div class="menu-grid">
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Curly Fries</h3>
+                <span class="menu-card__price">$6.00</span>
+              </div>
+              <p class="menu-card__desc">Crispy, seasoned spirals — the crowd favorite</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Steak Fries</h3>
+                <span class="menu-card__price">$6.00</span>
+              </div>
+              <p class="menu-card__desc">Thick-cut, hearty, and satisfying</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Shoestring Fries</h3>
+                <span class="menu-card__price">$6.00</span>
+              </div>
+              <p class="menu-card__desc">Super thin, extra crispy, light as air</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Waffle Fries</h3>
+                <span class="menu-card__price">$6.00</span>
+              </div>
+              <p class="menu-card__desc">Extra surface area = extra crunch</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Tater Tots</h3>
+                <span class="menu-card__price">$6.00</span>
+              </div>
+              <p class="menu-card__desc">Golden, crispy, and forever iconic</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Crispy Crowns</h3>
+                <span class="menu-card__price">$6.00</span>
+              </div>
+              <p class="menu-card__desc">Flat and crispy — maximum crunch per bite</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Sweet Potato Fries</h3>
+                <span class="menu-card__price">$6.50</span>
+              </div>
+              <p class="menu-card__desc">Naturally sweet with a satisfying crisp</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Baked Potato</h3>
+                <span class="menu-card__price">$6.50</span>
+              </div>
+              <p class="menu-card__desc">Classic half-open loaded style, fully customizable</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── Proteins ── -->
+        <div class="tab-panel" id="tab-proteins" role="tabpanel">
+          <p class="panel-intro">Pick one. Add a second protein for +$2.50.</p>
+          <div class="menu-grid">
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Grilled Chicken</h3>
+                <span class="menu-card__price">+$3.50</span>
+              </div>
+              <p class="menu-card__desc">Tender, seasoned, and sliced</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Shaved Steak</h3>
+                <span class="menu-card__price">+$4.00</span>
+              </div>
+              <p class="menu-card__desc">Thin-cut ribeye, savory and rich</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Pulled Pork</h3>
+                <span class="menu-card__price">+$3.50</span>
+              </div>
+              <p class="menu-card__desc">Slow-smoked, fall-apart tender</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Crispy Bacon Bits</h3>
+                <span class="menu-card__price">+$3.00</span>
+              </div>
+              <p class="menu-card__desc">House-cooked, crumbled, generous portion</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Chili</h3>
+                <span class="menu-card__price">+$3.00</span>
+              </div>
+              <p class="menu-card__desc">Hearty beef chili with a little heat</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Black Beans <span class="veg-badge">V</span></h3>
+                <span class="menu-card__price">+$2.50</span>
+              </div>
+              <p class="menu-card__desc">Seasoned and hearty — great vegetarian base</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Roasted Veggies <span class="veg-badge">V</span></h3>
+                <span class="menu-card__price">+$2.50</span>
+              </div>
+              <p class="menu-card__desc">Bell peppers, zucchini, red onion</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── Cheeses ── -->
+        <div class="tab-panel" id="tab-cheeses" role="tabpanel">
+          <p class="panel-intro">Pick one. Add a second cheese for $0.50.</p>
+          <div class="menu-grid">
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Queso Blanco</h3>
+              <p class="menu-card__desc">Warm, creamy, drizzled on top — fan favorite</p>
+            </article>
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Shredded Cheddar</h3>
+              <p class="menu-card__desc">Classic sharp cheddar, melted in</p>
+            </article>
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Shredded Pepper Jack</h3>
+              <p class="menu-card__desc">A little kick, a lot of flavor</p>
+            </article>
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Crumbled Feta</h3>
+              <p class="menu-card__desc">Salty, tangy — pairs great with veggies and sweet potato</p>
+            </article>
+
+            <article class="menu-card menu-card--muted">
+              <h3 class="menu-card__name">No Cheese</h3>
+              <p class="menu-card__desc">We respect the choice</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── Sauces ── -->
+        <div class="tab-panel" id="tab-sauces" role="tabpanel">
+          <p class="panel-intro">Pick up to two. Additional sauces $0.50 each.</p>
+          <div class="menu-grid">
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">BBQ</h3>
+                <span class="heat-badge heat-mild">🌶 Mild</span>
+              </div>
+              <p class="menu-card__desc">Smoky, sweet, KC-style</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Buffalo</h3>
+                <span class="heat-badge heat-medium">🌶🌶 Medium</span>
+              </div>
+              <p class="menu-card__desc">Classic tangy heat</p>
+            </article>
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Ranch</h3>
+              <p class="menu-card__desc">Cool and creamy</p>
+            </article>
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Garlic Aioli</h3>
+              <p class="menu-card__desc">Rich, savory, addictive</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Sriracha Honey</h3>
+                <span class="heat-badge heat-mild">🌶 Mild-Med</span>
+              </div>
+              <p class="menu-card__desc">Sweet heat — especially good on sweet potato</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Chipotle Mayo</h3>
+                <span class="heat-badge heat-mild">🌶 Mild</span>
+              </div>
+              <p class="menu-card__desc">Smoky and creamy</p>
+            </article>
+
+            <article class="menu-card">
+              <h3 class="menu-card__name">Queso Drizzle</h3>
+              <p class="menu-card__desc">Extra queso on everything (no shame)</p>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── Extras ── -->
+        <div class="tab-panel" id="tab-extras" role="tabpanel">
+          <p class="panel-intro">Two extras included with every build. Additional extras $0.50 each.</p>
+          <div class="extras-grid">
+            <span class="extra-tag">Sour Cream</span>
+            <span class="extra-tag">Butter</span>
+            <span class="extra-tag">Fresh Chives</span>
+            <span class="extra-tag">Pickled Jalapeños</span>
+            <span class="extra-tag">Caramelized Onions</span>
+            <span class="extra-tag">Pickled Red Onions</span>
+            <span class="extra-tag">Fresh Pico de Gallo</span>
+            <span class="extra-tag">Broccoli</span>
+            <span class="extra-tag">Corn</span>
+            <span class="extra-tag">Crispy Fried Onions</span>
+            <span class="extra-tag">Extra Sauce</span>
+          </div>
+        </div>
+
+        <!-- ── Drinks ── -->
+        <div class="tab-panel" id="tab-drinks" role="tabpanel">
+          <p class="panel-intro">Something to wash it all down.</p>
+          <div class="menu-grid">
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Fountain Drink</h3>
+                <span class="menu-card__price">$1.50 / $2 / $2.50</span>
+              </div>
+              <p class="menu-card__desc">Small / Medium / Large</p>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Fresh Lemonade</h3>
+                <span class="menu-card__price">$3.00</span>
+              </div>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Strawberry Lemonade</h3>
+                <span class="menu-card__price">$3.50</span>
+              </div>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Sparkling Water</h3>
+                <span class="menu-card__price">$2.00</span>
+              </div>
+            </article>
+
+            <article class="menu-card">
+              <div class="menu-card__top">
+                <h3 class="menu-card__name">Bottled Water</h3>
+                <span class="menu-card__price">$1.50</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- ── Pricing Summary Callout ── -->
+        <div class="pricing-callout">
+          <h3 class="pricing-callout__heading">How It Works</h3>
+          <div class="pricing-callout__grid">
+            <div class="pricing-row">
+              <span class="pricing-row__label">Base (build your own)</span>
+              <span class="pricing-row__price">$6.00 – $6.50</span>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-row__label">+ Protein</span>
+              <span class="pricing-row__price">+$2.50 – $4.00</span>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-row__label">+ 2nd Protein</span>
+              <span class="pricing-row__price">+$2.50</span>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-row__label">+ 2nd Cheese</span>
+              <span class="pricing-row__price">+$0.50</span>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-row__label">+ Extra Sauce or Topping</span>
+              <span class="pricing-row__price">+$0.50 each</span>
+            </div>
+            <div class="pricing-row pricing-row--highlight">
+              <span class="pricing-row__label">Signature Build</span>
+              <span class="pricing-row__price">$11.50 – $13.50</span>
+            </div>
+            <div class="pricing-row">
+              <span class="pricing-row__label">Drinks</span>
+              <span class="pricing-row__price">$1.50 – $3.50</span>
+            </div>
+          </div>
+          <p class="pricing-callout__note">Menu and prices subject to change. Follow us on Instagram @mattspotats for daily specials.</p>
+        </div>
+
+      </div><!-- /container -->
+    </div><!-- /menu-panels -->
+
   </section>
 
   <!-- ============================================================
