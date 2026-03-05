@@ -99,7 +99,7 @@ test.describe('Mobile Responsiveness', () => {
         
         // Check that cards are visible and properly sized
         const cards = page.locator('.menu-card--signature');
-        await expect(cards).toHaveCount(6);
+        await expect(cards).toHaveCount(7);
         
         // First card should be visible
         await expect(cards.first()).toBeVisible();

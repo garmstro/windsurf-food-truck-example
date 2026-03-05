@@ -172,3 +172,79 @@ test.describe('Catering Form', () => {
     await expect(submitButton).toBeEnabled();
   });
 });
+
+test.describe('Menu - Matt\'s Meats Signature Item', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#menu').scrollIntoViewIfNeeded();
+  });
+
+  test('Matt\'s Meats signature item is present with correct details', async ({ page }) => {
+    // Navigate to signatures tab
+    await page.locator('button[data-tab="signatures"]').click();
+    
+    // Check that Matt's Meats card exists
+    const mattsMetasCard = page.locator('.menu-card:has-text("Matt\'s Meats")');
+    await expect(mattsMetasCard).toBeVisible();
+    
+    // Verify the price is $17.50
+    const priceElement = mattsMetasCard.locator('.menu-card__price');
+    await expect(priceElement).toHaveText('$17.50');
+    
+    // Verify base is Tater Tots
+    const baseElement = mattsMetasCard.locator('.menu-card__base');
+    await expect(baseElement).toContainText('Tater Tots');
+    
+    // Verify toppings are listed correctly
+    const toppingsElement = mattsMetasCard.locator('.menu-card__toppings');
+    await expect(toppingsElement).toContainText('Grilled chicken');
+    await expect(toppingsElement).toContainText('Pulled pork');
+    await expect(toppingsElement).toContainText('Shaved steak');
+    await expect(toppingsElement).toContainText('Crispy bacon bits');
+    await expect(toppingsElement).toContainText('Shredded Cheddar');
+    await expect(toppingsElement).toContainText('BBQ sauce');
+  });
+
+  test('all signature menu prices are correct', async ({ page }) => {
+    // Navigate to signatures tab
+    await page.locator('button[data-tab="signatures"]').click();
+    
+    // Define expected signature items with their prices
+    const expectedSignatures = [
+      { name: 'The Classic Matt', price: '$12.00' },
+      { name: 'The Pulled Pork Paradise', price: '$13.00' },
+      { name: 'The Buffalo Bomb', price: '$12.00' },
+      { name: 'The Sweet & Smoky', price: '$12.50' },
+      { name: 'The Baked Boss', price: '$13.50' },
+      { name: 'The Veggie Victory', price: '$11.50' },
+      { name: 'Matt\'s Meats', price: '$17.50' }
+    ];
+    
+    // Verify each signature item and its price
+    for (const signature of expectedSignatures) {
+      const card = page.locator(`.menu-card:has-text("${signature.name}")`);
+      await expect(card).toBeVisible();
+      
+      const priceElement = card.locator('.menu-card__price');
+      await expect(priceElement).toHaveText(signature.price);
+    }
+  });
+
+  test('pricing summary reflects updated signature build range', async ({ page }) => {
+    // Navigate to menu and scroll to pricing summary
+    await page.locator('#menu').scrollIntoViewIfNeeded();
+    
+    // Find the pricing summary callout
+    const pricingSummary = page.locator('.pricing-callout');
+    await expect(pricingSummary).toBeVisible();
+    
+    // Check that the signature build price range is updated to include $17.50
+    const signaturePricingRow = pricingSummary.locator('.pricing-row:has-text("Signature Build")');
+    await expect(signaturePricingRow).toBeVisible();
+    
+    // The range should now be $11.50 – $17.50 to reflect Matt's Meats
+    const priceRange = signaturePricingRow.locator('.pricing-row__price');
+    await expect(priceRange).toContainText('$11.50');
+    await expect(priceRange).toContainText('$17.50');
+  });
+});
