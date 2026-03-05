@@ -3,37 +3,8 @@
 //  Handles: hamburger menu, active nav link on scroll
 // ============================================================
 
-const nav        = document.getElementById('main-nav');
-const hamburger  = document.getElementById('hamburger');
-const navLinks   = document.getElementById('nav-links');
-const navItems   = navLinks.querySelectorAll('a');
-const sections   = document.querySelectorAll('section[id]');
-
 // --- Hamburger Menu Toggle ---
-hamburger.addEventListener('click', () => {
-  const isOpen = hamburger.classList.toggle('open');
-  navLinks.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-
-// Close mobile nav when a link is tapped
-navItems.forEach(link => {
-  link.addEventListener('click', closeMobileMenu);
-});
-
-// Close mobile nav when clicking outside the panel
-document.addEventListener('click', (e) => {
-  if (
-    navLinks.classList.contains('open') &&
-    !navLinks.contains(e.target) &&
-    !hamburger.contains(e.target)
-  ) {
-    closeMobileMenu();
-  }
-});
-
-function closeMobileMenu() {
+export function closeMobileMenu(hamburger, navLinks) {
   hamburger.classList.remove('open');
   navLinks.classList.remove('open');
   hamburger.setAttribute('aria-expanded', 'false');
@@ -41,10 +12,8 @@ function closeMobileMenu() {
 }
 
 // --- Active Nav Link on Scroll ---
-function updateActiveLink() {
-  const scrollY    = window.scrollY;
-  const navHeight  = nav.offsetHeight;
-  let currentId    = '';
+export function updateActiveLink(sections, navItems, scrollY, navHeight) {
+  let currentId = '';
 
   sections.forEach(section => {
     const sectionTop = section.offsetTop - navHeight - 20;
@@ -59,21 +28,63 @@ function updateActiveLink() {
   });
 }
 
-window.addEventListener('scroll', updateActiveLink, { passive: true });
-updateActiveLink();
-
 // --- Menu Tab Switching ---
-const tabBtns   = document.querySelectorAll('.tab-btn');
-const tabPanels = document.querySelectorAll('.tab-panel');
+export function activateTab(target, tabBtns, tabPanels) {
+  tabBtns.forEach(b => b.classList.remove('active'));
+  tabPanels.forEach(p => p.classList.remove('active'));
 
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
+  const activeBtn = Array.from(tabBtns).find(b => b.dataset.tab === target);
+  if (activeBtn) activeBtn.classList.add('active');
 
-    tabBtns.forEach(b => b.classList.remove('active'));
-    tabPanels.forEach(p => p.classList.remove('active'));
+  const activePanel = document.getElementById(`tab-${target}`);
+  if (activePanel) activePanel.classList.add('active');
+}
 
-    btn.classList.add('active');
-    document.getElementById(`tab-${target}`).classList.add('active');
+// --- Initialization (DOM querying and event wiring) ---
+function init() {
+  const nav      = document.getElementById('main-nav');
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  if (!nav || !hamburger || !navLinks) return;
+
+  const navItems  = Array.from(navLinks.querySelectorAll('a'));
+  const sections  = Array.from(document.querySelectorAll('section[id]'));
+  const tabBtns   = Array.from(document.querySelectorAll('.tab-btn'));
+  const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
-});
+
+  // Close mobile nav when a link is tapped
+  navItems.forEach(link => {
+    link.addEventListener('click', () => closeMobileMenu(hamburger, navLinks));
+  });
+
+  // Close mobile nav when clicking outside the panel
+  document.addEventListener('click', (e) => {
+    if (
+      navLinks.classList.contains('open') &&
+      !navLinks.contains(e.target) &&
+      !hamburger.contains(e.target)
+    ) {
+      closeMobileMenu(hamburger, navLinks);
+    }
+  });
+
+  window.addEventListener('scroll', () => {
+    updateActiveLink(sections, navItems, window.scrollY, nav.offsetHeight);
+  }, { passive: true });
+  updateActiveLink(sections, navItems, window.scrollY, nav.offsetHeight);
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activateTab(btn.dataset.tab, tabBtns, tabPanels);
+    });
+  });
+}
+
+init();
