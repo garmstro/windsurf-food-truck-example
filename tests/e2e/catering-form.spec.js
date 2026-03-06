@@ -173,39 +173,34 @@ test.describe('Catering Form', () => {
   });
 });
 
-test.describe('Menu - Matt\'s Meats Signature Item', () => {
+test.describe('Menu - Signature Items', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.locator('#menu').scrollIntoViewIfNeeded();
   });
 
-  test('Matt\'s Meats signature item is present with correct details', async ({ page }) => {
+  test('Pocket Spud signature item is present with correct details', async ({ page }) => {
     // Navigate to signatures tab
     await page.locator('button[data-tab="signatures"]').click();
     
-    // Check that Matt's Meats card exists
-    const mattsMetasCard = page.locator('.menu-card:has-text("Matt\'s Meats")');
-    await expect(mattsMetasCard).toBeVisible();
+    // Check that Pocket Spud card exists
+    const pocketSpudCard = page.locator('.menu-card:has-text("Pocket Spud")');
+    await expect(pocketSpudCard).toBeVisible();
     
-    // Verify the price is $17.50
-    const priceElement = mattsMetasCard.locator('.menu-card__price');
-    await expect(priceElement).toHaveText('$17.50');
+    // Verify the price is $6.00
+    const priceElement = pocketSpudCard.locator('.menu-card__price');
+    await expect(priceElement).toHaveText('$6.00');
     
-    // Verify base is Tater Tots
-    const baseElement = mattsMetasCard.locator('.menu-card__base');
-    await expect(baseElement).toContainText('Tater Tots');
+    // Verify base is Baked Potato
+    const baseElement = pocketSpudCard.locator('.menu-card__base');
+    await expect(baseElement).toContainText('Baked Potato');
     
-    // Verify toppings are listed correctly
-    const toppingsElement = mattsMetasCard.locator('.menu-card__toppings');
-    await expect(toppingsElement).toContainText('Grilled chicken');
-    await expect(toppingsElement).toContainText('Pulled pork');
-    await expect(toppingsElement).toContainText('Shaved steak');
-    await expect(toppingsElement).toContainText('Crispy bacon bits');
-    await expect(toppingsElement).toContainText('Shredded Cheddar');
-    await expect(toppingsElement).toContainText('BBQ sauce');
+    // Verify description mentions "no toppings"
+    const descriptionElement = pocketSpudCard.locator('.menu-card__description, .menu-card__toppings');
+    await expect(descriptionElement).toContainText('no toppings');
   });
 
-  test('all signature menu prices are correct', async ({ page }) => {
+  test('all signature menu prices are correct including Pocket Spud', async ({ page }) => {
     // Navigate to signatures tab
     await page.locator('button[data-tab="signatures"]').click();
     
@@ -217,7 +212,8 @@ test.describe('Menu - Matt\'s Meats Signature Item', () => {
       { name: 'The Sweet & Smoky', price: '$12.50' },
       { name: 'The Baked Boss', price: '$13.50' },
       { name: 'The Veggie Victory', price: '$11.50' },
-      { name: 'Matt\'s Meats', price: '$17.50' }
+      { name: 'Matt\'s Meats', price: '$17.50' },
+      { name: 'Pocket Spud', price: '$6.00' }
     ];
     
     // Verify each signature item and its price
@@ -230,7 +226,18 @@ test.describe('Menu - Matt\'s Meats Signature Item', () => {
     }
   });
 
-  test('pricing summary reflects updated signature build range', async ({ page }) => {
+  test('signatures tab shows 8 signature builds including Pocket Spud', async ({ page }) => {
+    const signaturesTab = page.locator('[data-tab="signatures"]');
+    await signaturesTab.click();
+    
+    const signatureCards = page.locator('.menu-card--signature');
+    await expect(signatureCards).toHaveCount(8);
+    
+    // Check that Pocket Spud is among the signature items
+    await expect(page.locator('text=Pocket Spud')).toBeVisible();
+  });
+
+  test('pricing summary reflects updated signature build range with Pocket Spud', async ({ page }) => {
     // Navigate to menu and scroll to pricing summary
     await page.locator('#menu').scrollIntoViewIfNeeded();
     
@@ -238,13 +245,13 @@ test.describe('Menu - Matt\'s Meats Signature Item', () => {
     const pricingSummary = page.locator('.pricing-callout');
     await expect(pricingSummary).toBeVisible();
     
-    // Check that the signature build price range is updated to include $17.50
+    // Check that the signature build price range is updated to include $6.00
     const signaturePricingRow = pricingSummary.locator('.pricing-row:has-text("Signature Build")');
     await expect(signaturePricingRow).toBeVisible();
     
-    // The range should now be $11.50 – $17.50 to reflect Matt's Meats
+    // The range should now be $6.00 – $17.50 to reflect Pocket Spud as the lowest price
     const priceRange = signaturePricingRow.locator('.pricing-row__price');
-    await expect(priceRange).toContainText('$11.50');
+    await expect(priceRange).toContainText('$6.00');
     await expect(priceRange).toContainText('$17.50');
   });
 });

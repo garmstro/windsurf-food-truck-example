@@ -24,12 +24,12 @@ test.describe('Menu Tabs', () => {
     }
   });
 
-  test('signatures tab shows 7 signature builds', async ({ page }) => {
+  test('signatures tab shows 8 signature builds', async ({ page }) => {
     const signaturesTab = page.locator('[data-tab="signatures"]');
     await signaturesTab.click();
     
     const signatureCards = page.locator('.menu-card--signature');
-    await expect(signatureCards).toHaveCount(7);
+    await expect(signatureCards).toHaveCount(8);
     
     // Check specific signature items
     await expect(page.locator('text=The Classic Matt')).toBeVisible();
@@ -39,6 +39,7 @@ test.describe('Menu Tabs', () => {
     await expect(page.locator('text=The Baked Boss')).toBeVisible();
     await expect(page.locator('text=The Veggie Victory')).toBeVisible();
     await expect(page.locator('text=Matt\'s Meats')).toBeVisible();
+    await expect(page.locator('text=Pocket Spud')).toBeVisible();
   });
 
   test('tab switching shows correct content', async ({ page }) => {
@@ -161,6 +162,6 @@ test.describe('Menu Tabs', () => {
     await expect(page.locator('.pricing-callout')).toBeVisible();
     await expect(page.locator('.pricing-callout:has-text("How It Works")')).toBeVisible();
     await expect(page.locator('.pricing-callout .pricing-row__label:has-text("Signature Build")')).toBeVisible();
-    await expect(page.locator('.pricing-callout:has-text("$11.50 – $17.50")')).toBeVisible();
+    await expect(page.locator('.pricing-callout:has-text("$6.00 – $17.50")')).toBeVisible();
   });
 });
