@@ -1,4 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const menu = require('../../menu.json');
 
 test.describe('Menu Tabs', () => {
   test.beforeEach(async ({ page }) => {
@@ -24,22 +28,15 @@ test.describe('Menu Tabs', () => {
     }
   });
 
-  test('signatures tab shows 8 signature builds', async ({ page }) => {
-    const signaturesTab = page.locator('[data-tab="signatures"]');
-    await signaturesTab.click();
-    
+  test('signatures tab shows all signature builds from menu.json', async ({ page }) => {
+    await page.locator('[data-tab="signatures"]').click();
+
     const signatureCards = page.locator('.menu-card--signature');
-    await expect(signatureCards).toHaveCount(8);
-    
-    // Check specific signature items
-    await expect(page.locator('text=The Classic Matt')).toBeVisible();
-    await expect(page.locator('text=The Pulled Pork Paradise')).toBeVisible();
-    await expect(page.locator('text=The Buffalo Bomb')).toBeVisible();
-    await expect(page.locator('text=The Sweet & Smoky')).toBeVisible();
-    await expect(page.locator('text=The Baked Boss')).toBeVisible();
-    await expect(page.locator('text=The Veggie Victory')).toBeVisible();
-    await expect(page.locator('text=Matt\'s Meats')).toBeVisible();
-    await expect(page.locator('text=Pocket Spud')).toBeVisible();
+    await expect(signatureCards).toHaveCount(menu.signatures.items.length);
+
+    for (const item of menu.signatures.items) {
+      await expect(page.locator(`text=${item.name}`)).toBeVisible();
+    }
   });
 
   test('tab switching shows correct content', async ({ page }) => {
@@ -79,89 +76,70 @@ test.describe('Menu Tabs', () => {
     }
   });
 
-  test('bases tab shows all base options', async ({ page }) => {
-    const basesTab = page.locator('[data-tab="bases"]');
-    await basesTab.click();
-    
+  test('bases tab shows all base options from menu.json', async ({ page }) => {
+    await page.locator('[data-tab="bases"]').click();
+
     const baseCards = page.locator('#tab-bases .menu-card');
-    await expect(baseCards).toHaveCount(8);
-    
-    // Check specific base items
-    await expect(page.locator('#tab-bases:has-text("Curly Fries")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Steak Fries")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Shoestring Fries")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Waffle Fries")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Tater Tots")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Crispy Crowns")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Sweet Potato Fries")')).toBeVisible();
-    await expect(page.locator('#tab-bases:has-text("Baked Potato")')).toBeVisible();
+    await expect(baseCards).toHaveCount(menu.bases.items.length);
+
+    for (const item of menu.bases.items) {
+      await expect(page.locator(`#tab-bases:has-text("${item.name}")`)).toBeVisible();
+    }
   });
 
-  test('proteins tab shows protein options with pricing', async ({ page }) => {
-    const proteinsTab = page.locator('[data-tab="proteins"]');
-    await proteinsTab.click();
-    
+  test('proteins tab shows all protein options from menu.json', async ({ page }) => {
+    await page.locator('[data-tab="proteins"]').click();
+
     const proteinCards = page.locator('#tab-proteins .menu-card');
-    await expect(proteinCards).toHaveCount(7);
-    
-    // Check specific protein items with prices
-    await expect(page.locator('#tab-proteins:has-text("Grilled Chicken")')).toBeVisible();
-    await expect(page.locator('#tab-proteins:has-text("+$3.50")')).toBeVisible();
-    await expect(page.locator('#tab-proteins:has-text("Shaved Steak")')).toBeVisible();
-    await expect(page.locator('#tab-proteins:has-text("+$4.00")')).toBeVisible();
-    await expect(page.locator('#tab-proteins:has-text("Pulled Pork")')).toBeVisible();
-    await expect(page.locator('#tab-proteins:has-text("Black Beans")')).toBeVisible();
-    await expect(page.locator('#tab-proteins .veg-badge')).toHaveCount(2); // Vegetarian badges
+    await expect(proteinCards).toHaveCount(menu.proteins.items.length);
+
+    for (const item of menu.proteins.items) {
+      await expect(page.locator(`#tab-proteins:has-text("${item.name}")`)).toBeVisible();
+    }
+
+    const vegCount = menu.proteins.items.filter(i => i.vegetarian).length;
+    await expect(page.locator('#tab-proteins .veg-badge')).toHaveCount(vegCount);
   });
 
-  test('sauces tab shows heat level badges', async ({ page }) => {
-    const saucesTab = page.locator('[data-tab="sauces"]');
-    await saucesTab.click();
-    
-    // Check heat badges are present
-    await expect(page.locator('#tab-sauces .heat-badge')).toHaveCount(4);
-    await expect(page.locator('#tab-sauces:has-text("🌶 Mild")')).toBeVisible();
-    await expect(page.locator('#tab-sauces:has-text("🌶🌶 Medium")')).toBeVisible();
-    
-    // Check specific sauces
-    await expect(page.locator('#tab-sauces:has-text("BBQ")')).toBeVisible();
-    await expect(page.locator('#tab-sauces:has-text("Buffalo")')).toBeVisible();
-    await expect(page.locator('#tab-sauces:has-text("Ranch")')).toBeVisible();
+  test('sauces tab shows heat level badges from menu.json', async ({ page }) => {
+    await page.locator('[data-tab="sauces"]').click();
+
+    const heatCount = menu.sauces.items.filter(i => i.heat !== null).length;
+    await expect(page.locator('#tab-sauces .heat-badge')).toHaveCount(heatCount);
+
+    for (const item of menu.sauces.items) {
+      await expect(page.locator(`#tab-sauces:has-text("${item.name}")`)).toBeVisible();
+    }
   });
 
-  test('extras tab shows extra ingredients as tags', async ({ page }) => {
-    const extrasTab = page.locator('[data-tab="extras"]');
-    await extrasTab.click();
-    
+  test('extras tab shows all extra ingredients from menu.json', async ({ page }) => {
+    await page.locator('[data-tab="extras"]').click();
+
     const extraTags = page.locator('.extra-tag');
-    await expect(extraTags).toHaveCount(11);
-    
-    // Check specific extras
-    await expect(page.locator('#tab-extras .extra-tag:has-text("Sour Cream")')).toBeVisible();
-    await expect(page.locator('#tab-extras .extra-tag:has-text("Fresh Chives")')).toBeVisible();
-    await expect(page.locator('#tab-extras .extra-tag:has-text("Pickled Jalapeños")')).toBeVisible();
-    await expect(page.locator('#tab-extras .extra-tag:has-text("Caramelized Onions")')).toBeVisible();
+    await expect(extraTags).toHaveCount(menu.extras.items.length);
+
+    for (const name of menu.extras.items) {
+      await expect(page.locator(`#tab-extras .extra-tag:has-text("${name}")`)).toBeVisible();
+    }
   });
 
-  test('drinks tab shows beverage options', async ({ page }) => {
-    const drinksTab = page.locator('[data-tab="drinks"]');
-    await drinksTab.click();
-    
+  test('drinks tab shows all beverage options from menu.json', async ({ page }) => {
+    await page.locator('[data-tab="drinks"]').click();
+
     const drinkCards = page.locator('#tab-drinks .menu-card');
-    await expect(drinkCards).toHaveCount(5);
-    
-    // Check specific drinks
-    await expect(page.locator('#tab-drinks:has-text("Fountain Drink")')).toBeVisible();
-    await expect(page.locator('#tab-drinks:has-text("$1.50 / $2 / $2.50")')).toBeVisible();
-    await expect(page.locator('#tab-drinks:has-text("Fresh Lemonade")')).toBeVisible();
-    await expect(page.locator('#tab-drinks .menu-card__price:has-text("$3.00")')).toBeVisible();
+    await expect(drinkCards).toHaveCount(menu.drinks.items.length);
+
+    for (const item of menu.drinks.items) {
+      await expect(page.locator(`#tab-drinks:has-text("${item.name}")`)).toBeVisible();
+    }
   });
 
-  test('pricing summary callout is visible', async ({ page }) => {
-    // Should be visible regardless of active tab
+  test('pricing summary callout reflects menu.json data', async ({ page }) => {
     await expect(page.locator('.pricing-callout')).toBeVisible();
     await expect(page.locator('.pricing-callout:has-text("How It Works")')).toBeVisible();
+
+    const sigRow = menu.pricingSummary.rows.find(r => r.label === 'Signature Build');
     await expect(page.locator('.pricing-callout .pricing-row__label:has-text("Signature Build")')).toBeVisible();
-    await expect(page.locator('.pricing-callout:has-text("$6.00 – $17.50")')).toBeVisible();
+    await expect(page.locator(`.pricing-callout:has-text("${sigRow.price}")`)).toBeVisible();
   });
 });

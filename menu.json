@@ -1,0 +1,141 @@
+{
+  "signatures": {
+    "intro": "Matt's handpicked combos. No decisions required.",
+    "items": [
+      {
+        "name": "The Classic Matt",
+        "price": "$12.00",
+        "base": "Steak Fries",
+        "toppings": "Grilled chicken, shredded cheddar, ranch, chives"
+      },
+      {
+        "name": "The Pulled Pork Paradise",
+        "price": "$13.00",
+        "base": "Crispy Crowns",
+        "toppings": "Pulled pork, queso blanco, BBQ, pickled jalapeños"
+      },
+      {
+        "name": "The Buffalo Bomb",
+        "price": "$12.00",
+        "base": "Curly Fries",
+        "toppings": "Grilled chicken, pepper jack, buffalo, ranch"
+      },
+      {
+        "name": "The Sweet & Smoky",
+        "price": "$12.50",
+        "base": "Sweet Potato Fries",
+        "toppings": "Pulled pork, shredded cheddar, sriracha honey"
+      },
+      {
+        "name": "The Baked Boss",
+        "price": "$13.50",
+        "base": "Baked Potato",
+        "toppings": "Shaved steak, queso blanco, sour cream, caramelized onions, chives"
+      },
+      {
+        "name": "The Veggie Victory",
+        "price": "$11.50",
+        "base": "Tater Tots",
+        "toppings": "Black beans, roasted veggies, crumbled feta, garlic aioli, pico de gallo"
+      },
+      {
+        "name": "Matt's Meats",
+        "price": "$17.50",
+        "base": "Tater Tots",
+        "toppings": "Grilled chicken, Pulled pork, Shaved steak, Crispy bacon bits, Shredded Cheddar, BBQ sauce"
+      },
+      {
+        "name": "Pocket Spud",
+        "price": "$6.00",
+        "base": "Baked Potato",
+        "toppings": "Just a classic baked potato with butter — no toppings"
+      }
+    ]
+  },
+  "bases": {
+    "intro": "Your foundation. Pick one — build from there.",
+    "items": [
+      { "name": "Curly Fries",        "price": "$6.00",  "desc": "Crispy, seasoned spirals — the crowd favorite" },
+      { "name": "Steak Fries",        "price": "$6.00",  "desc": "Thick-cut, hearty, and satisfying" },
+      { "name": "Shoestring Fries",   "price": "$6.00",  "desc": "Super thin, extra crispy, light as air" },
+      { "name": "Waffle Fries",       "price": "$6.00",  "desc": "Extra surface area = extra crunch" },
+      { "name": "Tater Tots",         "price": "$6.00",  "desc": "Golden, crispy, and forever iconic" },
+      { "name": "Crispy Crowns",      "price": "$6.00",  "desc": "Flat and crispy — maximum crunch per bite" },
+      { "name": "Sweet Potato Fries", "price": "$6.50",  "desc": "Naturally sweet with a satisfying crisp" },
+      { "name": "Baked Potato",       "price": "$6.50",  "desc": "Classic half-open loaded style, fully customizable" }
+    ]
+  },
+  "proteins": {
+    "intro": "Pick one. Add a second protein for +$2.50.",
+    "items": [
+      { "name": "Grilled Chicken",  "price": "+$3.50", "desc": "Tender, seasoned, and sliced",                         "vegetarian": false },
+      { "name": "Shaved Steak",     "price": "+$4.00", "desc": "Thin-cut ribeye, savory and rich",                     "vegetarian": false },
+      { "name": "Pulled Pork",      "price": "+$3.50", "desc": "Slow-smoked, fall-apart tender",                       "vegetarian": false },
+      { "name": "Crispy Bacon Bits","price": "+$3.00", "desc": "House-cooked, crumbled, generous portion",             "vegetarian": false },
+      { "name": "Chili",            "price": "+$3.00", "desc": "Hearty beef chili with a little heat",                 "vegetarian": false },
+      { "name": "Black Beans",      "price": "+$2.50", "desc": "Seasoned and hearty — great vegetarian base",          "vegetarian": true  },
+      { "name": "Roasted Veggies",  "price": "+$2.50", "desc": "Bell peppers, zucchini, red onion",                    "vegetarian": true  }
+    ]
+  },
+  "cheeses": {
+    "intro": "Pick one. Add a second cheese for $0.50.",
+    "items": [
+      { "name": "Queso Blanco",        "desc": "Warm, creamy, drizzled on top — fan favorite",                  "muted": false },
+      { "name": "Shredded Cheddar",    "desc": "Classic sharp cheddar, melted in",                              "muted": false },
+      { "name": "Shredded Pepper Jack","desc": "A little kick, a lot of flavor",                                "muted": false },
+      { "name": "Crumbled Feta",       "desc": "Salty, tangy — pairs great with veggies and sweet potato",     "muted": false },
+      { "name": "No Cheese",           "desc": "We respect the choice",                                         "muted": true  }
+    ]
+  },
+  "sauces": {
+    "intro": "Pick up to two. Additional sauces $0.50 each.",
+    "items": [
+      { "name": "BBQ",          "desc": "Smoky, sweet, KC-style",                           "heat": "mild"   },
+      { "name": "Buffalo",      "desc": "Classic tangy heat",                               "heat": "medium" },
+      { "name": "Ranch",        "desc": "Cool and creamy",                                  "heat": null     },
+      { "name": "Garlic Aioli", "desc": "Rich, savory, addictive",                          "heat": null     },
+      { "name": "Sriracha Honey","desc": "Sweet heat — especially good on sweet potato",    "heat": "mild-med"},
+      { "name": "Chipotle Mayo","desc": "Smoky and creamy",                                 "heat": "mild"   },
+      { "name": "Queso Drizzle","desc": "Extra queso on everything (no shame)",             "heat": null     }
+    ]
+  },
+  "extras": {
+    "intro": "Two extras included with every build. Additional extras $0.50 each.",
+    "items": [
+      "Sour Cream",
+      "Butter",
+      "Fresh Chives",
+      "Pickled Jalapeños",
+      "Caramelized Onions",
+      "Pickled Red Onions",
+      "Fresh Pico de Gallo",
+      "Broccoli",
+      "Corn",
+      "Crispy Fried Onions",
+      "Extra Sauce"
+    ]
+  },
+  "drinks": {
+    "intro": "Something to wash it all down.",
+    "items": [
+      { "name": "Fountain Drink",      "price": "$1.50 / $2 / $2.50", "desc": "Small / Medium / Large" },
+      { "name": "Fresh Lemonade",      "price": "$3.00",              "desc": null },
+      { "name": "Strawberry Lemonade", "price": "$3.50",              "desc": null },
+      { "name": "Sparkling Water",     "price": "$2.00",              "desc": null },
+      { "name": "Bottled Water",       "price": "$1.50",              "desc": null }
+    ]
+  },
+  "pricingSummary": {
+    "heading": "How It Works",
+    "rows": [
+      { "label": "Base (build your own)",      "price": "$6.00 – $6.50",    "highlight": false },
+      { "label": "+ Protein",                  "price": "+$2.50 – $4.00",   "highlight": false },
+      { "label": "+ 2nd Protein",              "price": "+$2.50",           "highlight": false },
+      { "label": "+ 2nd Cheese",               "price": "+$0.50",           "highlight": false },
+      { "label": "+ Extra Sauce or Topping",   "price": "+$0.50 each",      "highlight": false },
+      { "label": "Signature Build",            "price": "$6.00 – $17.50",   "highlight": true  },
+      { "label": "Drinks",                     "price": "$1.50 – $3.50",    "highlight": false }
+    ],
+    "note": "Menu and prices subject to change. Follow us on Instagram @mattspotats for daily specials."
+  }
+}

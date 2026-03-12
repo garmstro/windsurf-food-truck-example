@@ -1,0 +1,58 @@
+{
+  "_comment": "Test fixture for edge case scenarios. NOT published to the website. Use via data-menu-src attribute or direct import in tests.",
+  "signatures": {
+    "intro": "Edge case signatures.",
+    "items": [
+      {
+        "name": "Single Item Menu",
+        "price": "$99.99",
+        "base": "Tater Tots",
+        "toppings": "Everything"
+      }
+    ]
+  },
+  "bases": {
+    "intro": "Edge case bases.",
+    "items": [
+      { "name": "Only Base", "price": "$6.00", "desc": "The only base available" }
+    ]
+  },
+  "proteins": {
+    "intro": "Edge case proteins.",
+    "items": [
+      { "name": "All Veg Protein A", "price": "+$2.50", "desc": "Vegetarian option A", "vegetarian": true },
+      { "name": "All Veg Protein B", "price": "+$2.50", "desc": "Vegetarian option B", "vegetarian": true }
+    ]
+  },
+  "cheeses": {
+    "intro": "Edge case cheeses.",
+    "items": [
+      { "name": "Only Cheese", "desc": "The one cheese", "muted": false }
+    ]
+  },
+  "sauces": {
+    "intro": "Edge case sauces.",
+    "items": [
+      { "name": "No Heat Sauce", "desc": "No heat at all", "heat": null },
+      { "name": "Max Heat Sauce", "desc": "Very hot",      "heat": "medium" }
+    ]
+  },
+  "extras": {
+    "intro": "Edge case extras.",
+    "items": ["Only Extra"]
+  },
+  "drinks": {
+    "intro": "Edge case drinks.",
+    "items": [
+      { "name": "Free Water", "price": "$0.00", "desc": null }
+    ]
+  },
+  "pricingSummary": {
+    "heading": "Edge Case Pricing",
+    "rows": [
+      { "label": "Signature Build", "price": "$99.99",       "highlight": true  },
+      { "label": "Drinks",          "price": "$0.00",        "highlight": false }
+    ],
+    "note": "This is a test fixture — not real pricing."
+  }
+}
