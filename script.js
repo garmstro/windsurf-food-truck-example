@@ -4,6 +4,11 @@
 //           active nav link on scroll, tab switching
 // ============================================================
 
+import { fetchMenu, validateMenu, isTrustedMenuSrc } from './menuService.js';
+
+// Re-export validation helpers so existing imports from script.js keep working
+export { validateMenu, isTrustedMenuSrc };
+
 // --- Hamburger Menu Toggle ---
 export function closeMobileMenu(hamburger, navLinks) {
   hamburger.classList.remove('open');
@@ -31,74 +36,20 @@ export function updateActiveLink(sections, navItems, scrollY, navHeight) {
 
 // --- Menu Tab Switching ---
 export function activateTab(target, tabBtns, tabPanels) {
-  tabBtns.forEach(b => b.classList.remove('active'));
+  tabBtns.forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
   tabPanels.forEach(p => p.classList.remove('active'));
 
   const activeBtn = Array.from(tabBtns).find(b => b.dataset.tab === target);
-  if (activeBtn) activeBtn.classList.add('active');
+  if (activeBtn) {
+    activeBtn.classList.add('active');
+    activeBtn.setAttribute('aria-selected', 'true');
+  }
 
   const activePanel = document.getElementById(`tab-${target}`);
   if (activePanel) activePanel.classList.add('active');
-}
-
-// --- Menu Data Validation ---
-export function validateMenu(data) {
-  if (!data || typeof data !== 'object') return false;
-
-  const sections = ['signatures', 'bases', 'proteins', 'cheeses', 'sauces', 'extras', 'drinks'];
-  for (const key of sections) {
-    const section = data[key];
-    if (!section || typeof section !== 'object') return false;
-    if (typeof section.intro !== 'string') return false;
-    if (!Array.isArray(section.items)) return false;
-  }
-
-  if (!data.signatures.items.every(item =>
-    typeof item.name === 'string' && typeof item.price === 'string' &&
-    typeof item.base === 'string' && typeof item.toppings === 'string'
-  )) return false;
-
-  if (!data.bases.items.every(item =>
-    typeof item.name === 'string' && typeof item.price === 'string' && typeof item.desc === 'string'
-  )) return false;
-
-  if (!data.proteins.items.every(item =>
-    typeof item.name === 'string' && typeof item.price === 'string' && typeof item.desc === 'string'
-  )) return false;
-
-  if (!data.cheeses.items.every(item =>
-    typeof item.name === 'string' && typeof item.desc === 'string'
-  )) return false;
-
-  if (!data.sauces.items.every(item =>
-    typeof item.name === 'string' && typeof item.desc === 'string'
-  )) return false;
-
-  if (!data.extras.items.every(item => typeof item === 'string')) return false;
-
-  if (!data.drinks.items.every(item =>
-    typeof item.name === 'string' && typeof item.price === 'string'
-  )) return false;
-
-  const ps = data.pricingSummary;
-  if (!ps || typeof ps !== 'object') return false;
-  if (typeof ps.heading !== 'string') return false;
-  if (!Array.isArray(ps.rows)) return false;
-  if (typeof ps.note !== 'string') return false;
-
-  return true;
-}
-
-// --- Trusted Menu Source Whitelist ---
-export function isTrustedMenuSrc(src) {
-  if (typeof src !== 'string' || src.trim() === '') return false;
-  if (/^[a-z][a-z\d+\-.]*:/i.test(src)) return false;
-  if (src.startsWith('//')) return false;
-  if (src.startsWith('/')) return false;
-  if (src.includes('..')) return false;
-  if (!/^[\w\-./]+$/.test(src)) return false;
-  if (!src.endsWith('.json')) return false;
-  return true;
 }
 
 // --- Menu Error Display ---
@@ -134,17 +85,38 @@ function renderSignatures({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.menu-grid--signatures');
-  grid.innerHTML = items.map(item => `
-    <article class="menu-card menu-card--signature">
-      <div class="menu-card__top">
-        <span class="menu-card__sig-badge">Signature</span>
-        <span class="menu-card__price">${item.price}</span>
-      </div>
-      <h3 class="menu-card__name">${item.name}</h3>
-      <p class="menu-card__base"><span class="base-label">Base:</span> ${item.base}</p>
-      <p class="menu-card__toppings">${item.toppings}</p>
-    </article>
-  `).join('');
+  grid.replaceChildren(...items.map(item => {
+    const article = document.createElement('article');
+    article.className = 'menu-card menu-card--signature';
+
+    const top = document.createElement('div');
+    top.className = 'menu-card__top';
+    const badge = document.createElement('span');
+    badge.className = 'menu-card__sig-badge';
+    badge.textContent = 'Signature';
+    const price = document.createElement('span');
+    price.className = 'menu-card__price';
+    price.textContent = item.price;
+    top.append(badge, price);
+
+    const name = document.createElement('h3');
+    name.className = 'menu-card__name';
+    name.textContent = item.name;
+
+    const base = document.createElement('p');
+    base.className = 'menu-card__base';
+    const baseLabel = document.createElement('span');
+    baseLabel.className = 'base-label';
+    baseLabel.textContent = 'Base:';
+    base.append(baseLabel, ` ${item.base}`);
+
+    const toppings = document.createElement('p');
+    toppings.className = 'menu-card__toppings';
+    toppings.textContent = item.toppings;
+
+    article.append(top, name, base, toppings);
+    return article;
+  }));
 }
 
 function renderBases({ intro, items }) {
@@ -152,15 +124,27 @@ function renderBases({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.menu-grid');
-  grid.innerHTML = items.map(item => `
-    <article class="menu-card">
-      <div class="menu-card__top">
-        <h3 class="menu-card__name">${item.name}</h3>
-        <span class="menu-card__price">${item.price}</span>
-      </div>
-      <p class="menu-card__desc">${item.desc}</p>
-    </article>
-  `).join('');
+  grid.replaceChildren(...items.map(item => {
+    const article = document.createElement('article');
+    article.className = 'menu-card';
+
+    const top = document.createElement('div');
+    top.className = 'menu-card__top';
+    const name = document.createElement('h3');
+    name.className = 'menu-card__name';
+    name.textContent = item.name;
+    const price = document.createElement('span');
+    price.className = 'menu-card__price';
+    price.textContent = item.price;
+    top.append(name, price);
+
+    const desc = document.createElement('p');
+    desc.className = 'menu-card__desc';
+    desc.textContent = item.desc;
+
+    article.append(top, desc);
+    return article;
+  }));
 }
 
 function renderProteins({ intro, items }) {
@@ -168,15 +152,33 @@ function renderProteins({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.menu-grid');
-  grid.innerHTML = items.map(item => `
-    <article class="menu-card">
-      <div class="menu-card__top">
-        <h3 class="menu-card__name">${item.name}${item.vegetarian ? ' <span class="veg-badge">V</span>' : ''}</h3>
-        <span class="menu-card__price">${item.price}</span>
-      </div>
-      <p class="menu-card__desc">${item.desc}</p>
-    </article>
-  `).join('');
+  grid.replaceChildren(...items.map(item => {
+    const article = document.createElement('article');
+    article.className = 'menu-card';
+
+    const top = document.createElement('div');
+    top.className = 'menu-card__top';
+    const name = document.createElement('h3');
+    name.className = 'menu-card__name';
+    name.textContent = item.name;
+    if (item.vegetarian) {
+      const vegBadge = document.createElement('span');
+      vegBadge.className = 'veg-badge';
+      vegBadge.textContent = 'V';
+      name.append(' ', vegBadge);
+    }
+    const price = document.createElement('span');
+    price.className = 'menu-card__price';
+    price.textContent = item.price;
+    top.append(name, price);
+
+    const desc = document.createElement('p');
+    desc.className = 'menu-card__desc';
+    desc.textContent = item.desc;
+
+    article.append(top, desc);
+    return article;
+  }));
 }
 
 function renderCheeses({ intro, items }) {
@@ -184,12 +186,21 @@ function renderCheeses({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.menu-grid');
-  grid.innerHTML = items.map(item => `
-    <article class="menu-card${item.muted ? ' menu-card--muted' : ''}">
-      <h3 class="menu-card__name">${item.name}</h3>
-      <p class="menu-card__desc">${item.desc}</p>
-    </article>
-  `).join('');
+  grid.replaceChildren(...items.map(item => {
+    const article = document.createElement('article');
+    article.className = item.muted ? 'menu-card menu-card--muted' : 'menu-card';
+
+    const name = document.createElement('h3');
+    name.className = 'menu-card__name';
+    name.textContent = item.name;
+
+    const desc = document.createElement('p');
+    desc.className = 'menu-card__desc';
+    desc.textContent = item.desc;
+
+    article.append(name, desc);
+    return article;
+  }));
 }
 
 function renderSauces({ intro, items }) {
@@ -197,20 +208,35 @@ function renderSauces({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.menu-grid');
-  grid.innerHTML = items.map(item => {
-    const heatBadge = item.heat
-      ? `<span class="heat-badge heat-${item.heat.replace('-med', '')}">${heatLabels[item.heat]}</span>`
-      : '';
-    const top = heatBadge
-      ? `<div class="menu-card__top"><h3 class="menu-card__name">${item.name}</h3>${heatBadge}</div>`
-      : `<h3 class="menu-card__name">${item.name}</h3>`;
-    return `
-    <article class="menu-card">
-      ${top}
-      <p class="menu-card__desc">${item.desc}</p>
-    </article>
-    `;
-  }).join('');
+  grid.replaceChildren(...items.map(item => {
+    const article = document.createElement('article');
+    article.className = 'menu-card';
+
+    if (item.heat) {
+      const top = document.createElement('div');
+      top.className = 'menu-card__top';
+      const name = document.createElement('h3');
+      name.className = 'menu-card__name';
+      name.textContent = item.name;
+      const heatBadge = document.createElement('span');
+      heatBadge.className = `heat-badge heat-${item.heat.replace('-med', '')}`;
+      heatBadge.textContent = heatLabels[item.heat];
+      top.append(name, heatBadge);
+      article.append(top);
+    } else {
+      const name = document.createElement('h3');
+      name.className = 'menu-card__name';
+      name.textContent = item.name;
+      article.append(name);
+    }
+
+    const desc = document.createElement('p');
+    desc.className = 'menu-card__desc';
+    desc.textContent = item.desc;
+    article.append(desc);
+
+    return article;
+  }));
 }
 
 function renderExtras({ intro, items }) {
@@ -218,7 +244,12 @@ function renderExtras({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.extras-grid');
-  grid.innerHTML = items.map(name => `<span class="extra-tag">${name}</span>`).join('');
+  grid.replaceChildren(...items.map(name => {
+    const span = document.createElement('span');
+    span.className = 'extra-tag';
+    span.textContent = name;
+    return span;
+  }));
 }
 
 function renderDrinks({ intro, items }) {
@@ -226,15 +257,30 @@ function renderDrinks({ intro, items }) {
   if (!panel) return;
   panel.querySelector('.panel-intro').textContent = intro;
   const grid = panel.querySelector('.menu-grid');
-  grid.innerHTML = items.map(item => `
-    <article class="menu-card">
-      <div class="menu-card__top">
-        <h3 class="menu-card__name">${item.name}</h3>
-        <span class="menu-card__price">${item.price}</span>
-      </div>
-      ${item.desc ? `<p class="menu-card__desc">${item.desc}</p>` : ''}
-    </article>
-  `).join('');
+  grid.replaceChildren(...items.map(item => {
+    const article = document.createElement('article');
+    article.className = 'menu-card';
+
+    const top = document.createElement('div');
+    top.className = 'menu-card__top';
+    const name = document.createElement('h3');
+    name.className = 'menu-card__name';
+    name.textContent = item.name;
+    const price = document.createElement('span');
+    price.className = 'menu-card__price';
+    price.textContent = item.price;
+    top.append(name, price);
+    article.append(top);
+
+    if (item.desc) {
+      const desc = document.createElement('p');
+      desc.className = 'menu-card__desc';
+      desc.textContent = item.desc;
+      article.append(desc);
+    }
+
+    return article;
+  }));
 }
 
 function renderPricingSummary({ heading, rows, note }) {
@@ -242,24 +288,33 @@ function renderPricingSummary({ heading, rows, note }) {
   if (!callout) return;
   callout.querySelector('.pricing-callout__heading').textContent = heading;
   const grid = callout.querySelector('.pricing-callout__grid');
-  grid.innerHTML = rows.map(row => `
-    <div class="pricing-row${row.highlight ? ' pricing-row--highlight' : ''}">
-      <span class="pricing-row__label">${row.label}</span>
-      <span class="pricing-row__price">${row.price}</span>
-    </div>
-  `).join('');
+  grid.replaceChildren(...rows.map(row => {
+    const div = document.createElement('div');
+    div.className = row.highlight ? 'pricing-row pricing-row--highlight' : 'pricing-row';
+
+    const label = document.createElement('span');
+    label.className = 'pricing-row__label';
+    label.textContent = row.label;
+
+    const price = document.createElement('span');
+    price.className = 'pricing-row__price';
+    price.textContent = row.price;
+
+    div.append(label, price);
+    return div;
+  }));
   callout.querySelector('.pricing-callout__note').textContent = note;
 }
 
 // --- Initialization (DOM querying and event wiring) ---
 async function init() {
-  const nav      = document.getElementById('main-nav');
+  const nav       = document.getElementById('main-nav');
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('nav-links');
   if (!nav || !hamburger || !navLinks) return;
 
-  const navItems  = Array.from(navLinks.querySelectorAll('a'));
-  const sections  = Array.from(document.querySelectorAll('section[id]'));
+  const navItems = Array.from(navLinks.querySelectorAll('a'));
+  const sections = Array.from(document.querySelectorAll('section[id]'));
 
   hamburger.addEventListener('click', () => {
     const isOpen = hamburger.classList.toggle('open');
@@ -284,27 +339,48 @@ async function init() {
     }
   });
 
+  // ESC closes mobile menu
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+      closeMobileMenu(hamburger, navLinks);
+      hamburger.focus();
+    }
+  });
+
+  // Focus trap for mobile menu
+  navLinks.addEventListener('keydown', (e) => {
+    if (!navLinks.classList.contains('open') || e.key !== 'Tab') return;
+    const focusable = Array.from(navLinks.querySelectorAll('a, button'));
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
   window.addEventListener('scroll', () => {
     updateActiveLink(sections, navItems, window.scrollY, nav.offsetHeight);
   }, { passive: true });
   updateActiveLink(sections, navItems, window.scrollY, nav.offsetHeight);
 
   // Fetch menu data and render
-  const rawSrc = document.documentElement.dataset.menuSrc;
+  const rawSrc  = document.documentElement.dataset.menuSrc;
   const menuSrc = (rawSrc !== undefined && isTrustedMenuSrc(rawSrc)) ? rawSrc : 'menu.json';
 
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 8000);
-
   try {
-    const response = await fetch(menuSrc, { signal: controller.signal });
-    clearTimeout(timeoutId);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    if (!validateMenu(data)) throw new Error('Menu data failed schema validation');
+    const data = await fetchMenu(menuSrc);
     renderMenu(data);
   } catch (err) {
-    clearTimeout(timeoutId);
+    console.error("[Matt's Potats] Menu load failed:", err.message);
     showMenuError();
     return;
   }
@@ -316,6 +392,35 @@ async function init() {
     btn.addEventListener('click', () => {
       activateTab(btn.dataset.tab, tabBtns, tabPanels);
     });
+  });
+
+  // Keyboard navigation for tab bar (ArrowLeft/Right, Home, End)
+  const tabBar = document.querySelector('.menu-tabbar__inner');
+  if (tabBar) {
+    tabBar.addEventListener('keydown', (e) => {
+      const currentIndex = tabBtns.findIndex(b => b === document.activeElement);
+      if (currentIndex < 0) return;
+      let nextIndex = -1;
+      if (e.key === 'ArrowRight') {
+        nextIndex = (currentIndex + 1) % tabBtns.length;
+      } else if (e.key === 'ArrowLeft') {
+        nextIndex = (currentIndex - 1 + tabBtns.length) % tabBtns.length;
+      } else if (e.key === 'Home') {
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        nextIndex = tabBtns.length - 1;
+      }
+      if (nextIndex >= 0) {
+        e.preventDefault();
+        tabBtns[nextIndex].focus();
+        activateTab(tabBtns[nextIndex].dataset.tab, tabBtns, tabPanels);
+      }
+    });
+  }
+
+  // Global error logging
+  window.addEventListener('error', (event) => {
+    console.error("[Matt's Potats] Unexpected error:", event.message);
   });
 }
 

@@ -3,6 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -12,6 +15,7 @@
     "test:e2e:debug": "playwright test --debug"
   },
   "devDependencies": {
+    "vite": "^5.0.0",
     "@playwright/test": "^1.58.2",
     "@vitest/coverage-v8": "^2.0.0",
     "jsdom": "^24.0.0",

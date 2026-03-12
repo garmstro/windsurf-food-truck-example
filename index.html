@@ -4,7 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matt's Potats — Potatoes. Elevated.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Security headers (meta-tag equivalents; authoritative headers set via _headers / server config) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer">
+  <!--
+    Content-Security-Policy
+    Note: Google Fonts CSS cannot be given a static SRI hash (Google generates it
+    dynamically per user-agent). For tighter CSP in production, self-host fonts and
+    remove the fonts.googleapis.com / fonts.gstatic.com allowances.
+    See: https://fonts.google.com/knowledge/using_type/self_hosting_web_fonts
+  -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://www.google.com; img-src 'self' data:; script-src 'self'">
+
+  <!--
+    Google Fonts — SRI limitation: SRI hashes cannot be applied because Google
+    serves a dynamically generated stylesheet. crossorigin="anonymous" is kept
+    for correct CORS handling.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet"
+        crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -66,14 +87,21 @@
 
     <!-- Sticky Tab Bar -->
     <div class="menu-tabbar" id="menu-tabbar">
-      <div class="menu-tabbar__inner">
-        <button class="tab-btn active" data-tab="signatures" type="button">⭐ Signatures</button>
-        <button class="tab-btn" data-tab="bases" type="button">🥔 Bases</button>
-        <button class="tab-btn" data-tab="proteins" type="button">🍗 Proteins</button>
-        <button class="tab-btn" data-tab="cheeses" type="button">🧀 Cheeses</button>
-        <button class="tab-btn" data-tab="sauces" type="button">🥫 Sauces</button>
-        <button class="tab-btn" data-tab="extras" type="button">✨ Extras</button>
-        <button class="tab-btn" data-tab="drinks" type="button">🥤 Drinks</button>
+      <div class="menu-tabbar__inner" role="tablist">
+        <button class="tab-btn active" data-tab="signatures" type="button"
+                id="tab-btn-signatures" role="tab" aria-selected="true" aria-controls="tab-signatures">⭐ Signatures</button>
+        <button class="tab-btn" data-tab="bases" type="button"
+                id="tab-btn-bases" role="tab" aria-selected="false" aria-controls="tab-bases">🥔 Bases</button>
+        <button class="tab-btn" data-tab="proteins" type="button"
+                id="tab-btn-proteins" role="tab" aria-selected="false" aria-controls="tab-proteins">🍗 Proteins</button>
+        <button class="tab-btn" data-tab="cheeses" type="button"
+                id="tab-btn-cheeses" role="tab" aria-selected="false" aria-controls="tab-cheeses">🧀 Cheeses</button>
+        <button class="tab-btn" data-tab="sauces" type="button"
+                id="tab-btn-sauces" role="tab" aria-selected="false" aria-controls="tab-sauces">🥫 Sauces</button>
+        <button class="tab-btn" data-tab="extras" type="button"
+                id="tab-btn-extras" role="tab" aria-selected="false" aria-controls="tab-extras">✨ Extras</button>
+        <button class="tab-btn" data-tab="drinks" type="button"
+                id="tab-btn-drinks" role="tab" aria-selected="false" aria-controls="tab-drinks">🥤 Drinks</button>
       </div>
     </div>
 
@@ -82,43 +110,43 @@
       <div class="container">
 
         <!-- ── Signatures ── -->
-        <div class="tab-panel active" id="tab-signatures" role="tabpanel">
+        <div class="tab-panel active" id="tab-signatures" role="tabpanel" aria-labelledby="tab-btn-signatures">
           <p class="panel-intro"></p>
           <div class="menu-grid menu-grid--signatures"></div>
         </div>
 
         <!-- ── Bases ── -->
-        <div class="tab-panel" id="tab-bases" role="tabpanel">
+        <div class="tab-panel" id="tab-bases" role="tabpanel" aria-labelledby="tab-btn-bases">
           <p class="panel-intro"></p>
           <div class="menu-grid"></div>
         </div>
 
         <!-- ── Proteins ── -->
-        <div class="tab-panel" id="tab-proteins" role="tabpanel">
+        <div class="tab-panel" id="tab-proteins" role="tabpanel" aria-labelledby="tab-btn-proteins">
           <p class="panel-intro"></p>
           <div class="menu-grid"></div>
         </div>
 
         <!-- ── Cheeses ── -->
-        <div class="tab-panel" id="tab-cheeses" role="tabpanel">
+        <div class="tab-panel" id="tab-cheeses" role="tabpanel" aria-labelledby="tab-btn-cheeses">
           <p class="panel-intro"></p>
           <div class="menu-grid"></div>
         </div>
 
         <!-- ── Sauces ── -->
-        <div class="tab-panel" id="tab-sauces" role="tabpanel">
+        <div class="tab-panel" id="tab-sauces" role="tabpanel" aria-labelledby="tab-btn-sauces">
           <p class="panel-intro"></p>
           <div class="menu-grid"></div>
         </div>
 
         <!-- ── Extras ── -->
-        <div class="tab-panel" id="tab-extras" role="tabpanel">
+        <div class="tab-panel" id="tab-extras" role="tabpanel" aria-labelledby="tab-btn-extras">
           <p class="panel-intro"></p>
           <div class="extras-grid"></div>
         </div>
 
         <!-- ── Drinks ── -->
-        <div class="tab-panel" id="tab-drinks" role="tabpanel">
+        <div class="tab-panel" id="tab-drinks" role="tabpanel" aria-labelledby="tab-btn-drinks">
           <p class="panel-intro"></p>
           <div class="menu-grid"></div>
         </div>

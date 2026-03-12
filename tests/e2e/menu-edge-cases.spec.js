@@ -125,6 +125,16 @@ test.describe('Menu rendering — edge case fixture', () => {
     await expect(rowEl.locator('.pricing-row__label')).toHaveText(highlightedRow.label);
   });
 
+  // ── Fetch failure ─────────────────────────────────────────────
+
+  test('shows error fallback when menu fetch fails', async ({ page }) => {
+    await page.route('**/menu.json', route => route.abort());
+    await page.goto('/');
+    await expect(page.locator('#menu-error')).toBeVisible();
+    await expect(page.locator('.menu-panels')).toBeHidden();
+    await expect(page.locator('#menu-tabbar')).toBeHidden();
+  });
+
   // ── Tab switching still works with minimal data ───────────────
 
   test('tab switching works correctly with minimal menu data', async ({ page }) => {

@@ -3,9 +3,9 @@ import { activateTab } from '../../script.js';
 
 function makeElements() {
   document.body.innerHTML = `
-    <button class="tab-btn active" data-tab="signatures">Signatures</button>
-    <button class="tab-btn" data-tab="bases">Bases</button>
-    <button class="tab-btn" data-tab="proteins">Proteins</button>
+    <button class="tab-btn active" data-tab="signatures" aria-selected="true">Signatures</button>
+    <button class="tab-btn" data-tab="bases" aria-selected="false">Bases</button>
+    <button class="tab-btn" data-tab="proteins" aria-selected="false">Proteins</button>
     <div class="tab-panel active" id="tab-signatures"></div>
     <div class="tab-panel" id="tab-bases"></div>
     <div class="tab-panel" id="tab-proteins"></div>
@@ -64,5 +64,26 @@ describe('activateTab', () => {
     activateTab('proteins', tabBtns, tabPanels);
     expect(document.getElementById('tab-proteins').classList.contains('active')).toBe(true);
     expect(document.getElementById('tab-bases').classList.contains('active')).toBe(false);
+  });
+
+  it('sets aria-selected="true" on the active button', () => {
+    const { tabBtns, tabPanels } = makeElements();
+    activateTab('bases', tabBtns, tabPanels);
+    const basesBtn = tabBtns.find(b => b.dataset.tab === 'bases');
+    expect(basesBtn.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('sets aria-selected="false" on all inactive buttons', () => {
+    const { tabBtns, tabPanels } = makeElements();
+    activateTab('bases', tabBtns, tabPanels);
+    const others = tabBtns.filter(b => b.dataset.tab !== 'bases');
+    others.forEach(b => expect(b.getAttribute('aria-selected')).toBe('false'));
+  });
+
+  it('only one button has aria-selected="true" at a time', () => {
+    const { tabBtns, tabPanels } = makeElements();
+    activateTab('proteins', tabBtns, tabPanels);
+    const selected = tabBtns.filter(b => b.getAttribute('aria-selected') === 'true');
+    expect(selected).toHaveLength(1);
   });
 });
