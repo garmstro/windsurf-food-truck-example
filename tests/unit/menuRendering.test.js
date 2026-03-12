@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderMenu } from '../../script.js';
+import { renderMenu } from '../../src/script.js';
 
 // Build the full DOM structure that renderMenu depends on
 function setupDOM() {

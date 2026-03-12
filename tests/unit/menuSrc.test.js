@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isTrustedMenuSrc } from '../../script.js';
+import { isTrustedMenuSrc } from '../../src/script.js';
 
 describe('isTrustedMenuSrc', () => {
   // --- Valid paths ---

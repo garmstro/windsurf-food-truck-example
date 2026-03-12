@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  root: 'src',
   build: {
-    outDir: 'dist',
+    outDir: '../dist',
     rollupOptions: {
       output: {
         // Content-hashed filenames for long-lived caching and CSP hash support
@@ -11,5 +12,8 @@ export default defineConfig({
         entryFileNames: 'assets/[name]-[hash].js',
       },
     },
+  },
+  server: {
+    port: 3000,
   },
 });

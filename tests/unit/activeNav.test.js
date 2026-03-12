@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { updateActiveLink } from '../../script.js';
+import { updateActiveLink } from '../../src/script.js';
 
 function makeElements() {
   document.body.innerHTML = `

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { closeMobileMenu } from '../../script.js';
+import { closeMobileMenu } from '../../src/script.js';
 
 function makeElements() {
   document.body.innerHTML = `

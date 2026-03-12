@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { activateTab } from '../../script.js';
+import { activateTab } from '../../src/script.js';
 
 function makeElements() {
   document.body.innerHTML = `

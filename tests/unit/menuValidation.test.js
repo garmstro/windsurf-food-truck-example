@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateMenu } from '../../script.js';
+import { validateMenu } from '../../src/script.js';
 
 // Minimal valid menu fixture used as the baseline
 function validMenu() {

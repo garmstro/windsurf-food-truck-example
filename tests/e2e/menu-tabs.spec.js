@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
-const menu = require('../../menu.json');
+const menu = require('../../src/menu.json');
 
 test.describe('Menu Tabs', () => {
   test.beforeEach(async ({ page }) => {
