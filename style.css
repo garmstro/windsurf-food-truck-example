@@ -811,6 +811,47 @@ ul {
   line-height: 1.6;
 }
 
+/* --- Menu Error Fallback --- */
+.menu-error {
+  padding: 64px 24px;
+}
+
+.menu-error__inner {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: var(--color-peach-tint);
+  border: 2px dashed var(--color-amber-gold);
+  border-radius: var(--radius-card);
+  padding: 48px 40px;
+}
+
+.menu-error__icon {
+  display: block;
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.menu-error__heading {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--color-potato-brown);
+  margin-bottom: 12px;
+}
+
+.menu-error__body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-muted-text);
+  line-height: 1.7;
+}
+
+.menu-error__link {
+  color: var(--color-spicy-orange);
+  text-decoration: underline;
+}
+
 /* ============================================================
    OUR STORY SECTION
    ============================================================ */

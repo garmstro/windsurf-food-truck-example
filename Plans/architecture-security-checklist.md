@@ -1,10 +1,10 @@
 # Architecture & Security Upgrade Checklist
 
 ## Phase 1 – Data validation & error resilience
-- [ ] Add schema validation for `menu.json` before rendering (e.g., Zod or manual checks).
-- [ ] Build a user-facing fallback panel when validation fails (e.g., "Menu temporarily unavailable").
-- [ ] Wrap the menu fetch in `try/catch`, add timeout/error handling, and surface status messages.
-- [ ] Validate/whitelist the `data-menu-src` attribute so only trusted relative paths are fetched.
+- [x] Add schema validation for `menu.json` before rendering (e.g., Zod or manual checks).
+- [x] Build a user-facing fallback panel when validation fails (e.g., "Menu temporarily unavailable").
+- [x] Wrap the menu fetch in `try/catch`, add timeout/error handling, and surface status messages.
+- [x] Validate/whitelist the `data-menu-src` attribute so only trusted relative paths are fetched.
 
 ## Phase 2 – Rendering & state structure
 - [ ] Extract fetching/validation logic into a dedicated `menuService` (or similar) module.

@@ -120,7 +120,7 @@ test.describe('Mobile Responsiveness', () => {
         await expect(storyText).toBeVisible();
         
         // Check contact links are clickable
-        const emailLink = page.locator('a[href="mailto:matt@mattspotats.com"]');
+        const emailLink = page.locator('.story-contact a[href="mailto:matt@mattspotats.com"]');
         const phoneLink = page.locator('a[href="tel:+18165550123"]');
         
         await expect(emailLink).toBeVisible();
